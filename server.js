@@ -14,6 +14,24 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+app.use(express.static(__dirname + "/public"));
+
 app.listen(3000, function(){
 	console.log("listening on 3000");
+});
+
+app.get("/" , (request, response) => {
+	response.render("index",{"authenticated" : ""});
+});
+
+app.get("/create" , (request, response) => {
+	response.render("create",{"authenticated" : ""});
+});
+
+app.get("/register" , (request, response) => {
+	response.render("register",{"authenticated" : ""});
+});
+
+app.get("/tracking" , (request, response) => {
+	response.render("tracking",{"authenticated" : ""});
 });
