@@ -14,6 +14,7 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+// Wichtig sonst funktionieren die eingebunden dateien nicht
 app.use(express.static(__dirname + "/public"));
 
 app.listen(3000, function(){
