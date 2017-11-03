@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Time Tree - Registrierung</title>
+	<title>Time Tree - Error</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<script src="/jquery-3.2.1.js"></script>
@@ -39,25 +39,42 @@
 					<path class="cls-1" d="M247.59,182.41a.18.18,0,0,0-.13-.19l.74-1.3-.1.06.76-.2,1,.65v.8q-.86.63-.4.48l.26-.06-1.46-.39a.56.56,0,0,1-.19-.53q0-.34,0-.14c0,.11.15-.24.27-.31a.78.78,0,0,1,1.13.58q0-.23,0-.05a.55.55,0,0,1-.2.43,1,1,0,0,1-1.1.07.26.26,0,0,1-.09-.1q-.09-.14,0,.05l-.05-.12q.05.22,0,0c0-.58.32-.79.9-.75l-.09,0,.07,0c0,.07.06.12.06.21s-.3.45-.07.26c-.11.09,0,0,.07,0q-.18,0,0,0t0,0l.15,0a.16.16,0,0,1-.12-.06c0-.14,0,.25,0,0,0,.21,0,0,0,.06s0-.18,0,.07c0,0,0,.4,0,.21s-.06.16-.07.2c.07-.26-.08,0,0,0s-.13.17.05,0c-.19.19.14,0-.13.07.08,0,.13,0,.21,0-.24,0,0,.06-.18-.06.16.1,0,0-.1-.1s.1.24-.08-.12,0,0,0-.13,0,.16,0-.11c0,.1-.15.34,0,.06.94-1.69-1.65-3.2-2.59-1.51a3.39,3.39,0,0,0,1.3,4.5,3,3,0,0,0,4.24-1.27,3.35,3.35,0,0,0-1.08-4.34A3.09,3.09,0,0,0,246,181a2.76,2.76,0,0,0,3.4,3.27c1.84-.58,2-3,.66-4.19a2.19,2.19,0,0,0-2.6-.26,2.4,2.4,0,0,0-1,2.58,2.25,2.25,0,0,0,4.2.55,2.29,2.29,0,0,0-.65-3,2.34,2.34,0,0,0-3.11,1.52,1.94,1.94,0,0,0,2.32,2.3c1.64-.45,1.38-2.46.45-3.44-1.33-1.41-3.45.72-2.12,2.12Z" transform="translate(-49 -29.5)"/>
 					<path class="cls-1" d="M250.5,181V105.67a1.5,1.5,0,0,0-3,0V181a1.5,1.5,0,0,0,3,0Z" transform="translate(-49 -29.5)"/>
 					<path class="cls-1" d="M247.94,182.73l30.76,30.76a1.5,1.5,0,0,0,2.12-2.12l-31.43-31.43a1.5,1.5,0,0,0-2.12,2.12l31.43,31.43,2.12-2.12-30.76-30.76a1.5,1.5,0,0,0-2.12,2.12Z" transform="translate(-49 -29.5)"/>
-				</svg>			
+				</svg>					
 			<p>Time Tree - Aufwandslog</p></a>
 		</div>
+		<% if (authenticated){ %>
+		<nav id="main-nav">
+			<ul>
+				<li><a href="/">Startseite</a></li>
+				<li><a href="/zeiterfassung">Zeiterfassung</a></li>
+				<li><a href="/erstellen">Projekt erstellen</a></li>
+				<li><a href="/uebersicht">Übersicht</a></li>
+				<li><a href="/impressum">Impressum</a></li>
+				<li><a href="/logout">Ausloggen</a></li>
+			</ul>
+		</nav>
+		<div id="menubar">
+				<a href="#menu" class="menubutton"><img src="img/menue_button.png" alt="hamburger"></a>
+		</div>
+		<% }  else{ %>
 		<div id="login">
 			<form method="post" action="/login">
 				<input class="input-text" type="text" placeholder="Benutzername" name="user">
 				<input class="input-text" type="password" placeholder="Passwort" name="password">
 				<button class="button" type="submit">Login</button>
 			</form>
+			<a href="/register">Registrieren</a>
 		</div>
+		<% } %>
 	</header>
 	<section id="main">
 		<div id="content">
-			<h1>Registrierung</h1>
-			<form action="/sendregister" method="post">
-				<input class="register-form" type="text" placeholder="Benutzername" name="username"><br>
-				<input class="register-form" type="password" placeholder="Passwort" name="password-set"><br>
-				<button class="register-button" type="submit">Registrieren</button>
-			</form>
+		<% if(authenticated) { %>
+		
+		<% } else{ %>
+		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
+			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
+		<% } %>			
 		</div>
 	</section>
 	<footer>
