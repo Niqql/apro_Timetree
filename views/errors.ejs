@@ -69,12 +69,8 @@
 	</header>
 	<section id="main">
 		<div id="content">
-		<% if(authenticated) { %>
-		
-		<% } else{ %>
-		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
-			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
-		<% } %>			
+			<p><%= errors[id] %></p>
+			<a href="<%= back[bID] %>"> zurück </a>
 		</div>
 	</section>
 	<footer>
