@@ -33,19 +33,23 @@ app.listen(3000, function(){
 });
 
 app.get("/" , (request, response) => {
-	response.render("index",{"authenticated" : ""});
+	let authenticated = request.session['authenticated'];
+	response.render("index",{"authenticated" : authenticated});
 });
 
 app.get("/erstellen" , (request, response) => {
-	response.render("create",{"authenticated" : ""});
+	let authenticated = request.session['authenticated'];
+	response.render("create",{"authenticated" : authenticated});
 });
 
 app.get("/registrieren" , (request, response) => {
-	response.render("register",{"authenticated" : ""});
+	let authenticated = request.session['authenticated'];
+	response.render("register",{"authenticated" : authenticated});
 });
 
 app.get("/zeiterfassung" , (request, response) => {
-	response.render("tracking",{"authenticated" : ""});
+	let authenticated = request.session['authenticated'];
+	response.render("tracking",{"authenticated" : authenticated});
 });
 
 app.get("/impressum" , (request, response) => {
@@ -53,24 +57,25 @@ app.get("/impressum" , (request, response) => {
 });
 
 app.get("/uebersicht" , (request, response) => {
-	response.render("overview",{"authenticated" : ""});
+	let authenticated = request.session['authenticated'];
+	response.render("overview",{"authenticated" : authenticated});
 });
 
 app.get("/errors" , (request, response) => {
-	resposne.redirect("/")
+	response.redirect("/")
 });
 
 //login, registrierung, logout
 let errors = ["Registrierung fehlgeschlagen!", "Login fehlgeschlagen!", "Registrierung fehlgeschlagen, bitte wählen sie einen anderen Benutzernamen.", "Registrierung erfolgreich!"];
 let error_id = 0;
-let backs = ["/", "/register"];
+let backs = ["/", "/registrieren"];
 let back_id = 0;
 
-app.post("/registerSend" , (request, response) =>{	
+app.post("/sendregister" , (request, response) =>{	
 
 	//user für login schon vergeben, yo
 	const user = request.body.username;
-	const password = request.body.password-set;
+	const password = request.body.passwordset;
 	const hashPW = passwordHash.generate(password);
 	const document = { 'user' : user, 'password' : hashPW};
 	var check = true;	
@@ -87,24 +92,24 @@ app.post("/registerSend" , (request, response) =>{
 					if (err) {
 						error_id = 0;
 						back_id = 1;
-						response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+						response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 					}
 					error_id = 3;
 					back_id = 1;
-					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 				});
 			}
 			else{
 				error_id = 2;
 				back_id = 1;
-				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 			}
 		});
 	}
 	else{
 		error_id = 0;
 		back_id = 1;
-		response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+		response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 	}
 	
 });
@@ -126,25 +131,25 @@ app.post("/login" , (request, response) =>{
 				if(user == result.user && passwordHash.verify(password, result.password) ){
 					request.session[ 'authenticated' ] = true ;
 					request.session["user"] = user;
-					response.redirect("/content");
+					response.redirect("/");
 				}
 				else {
 					error_id = 1;
 					back_id = 0;
-					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 				}
 			}
 			else {
 				error_id = 1;
 				back_id = 0;
-				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 			}
 		});
 	}
 	else {
 		error_id = 1;
 		back_id = 0;
-		response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id});
+		response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : ""});
 	}
 });
 

@@ -50,7 +50,11 @@
 				<li><a href="/erstellen">Projekt erstellen</a></li>
 				<li><a href="/uebersicht">Übersicht</a></li>
 				<li><a href="/impressum">Impressum</a></li>
-				<li><a href="/logout">Ausloggen</a></li>
+				<li>
+					<form action="/logout" method="post">
+						<button type="submit">Logout</button>
+					</form>
+				</li>
 			</ul>
 		</nav>
 		<div id="menubar">
@@ -63,7 +67,7 @@
 				<input class="input-text" type="password" placeholder="Passwort" name="password">
 				<button class="button" type="submit">Login</button>
 			</form>
-			<a href="/register">Registrieren</a>
+			<a href="/registrieren">Registrieren</a>
 		</div>
 		<% } %>
 	</header>
