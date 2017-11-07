@@ -1,12 +1,17 @@
+//express initialisieren
 const express = require('express');
 const app = express();
 
+//body parser initialisieren
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
+//ejs initialisieren
 app.engine('.ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
 
+
+//Session intitialisieren
 const session = require('express-session');
 app.use(session({ 
 	secret: 'example',
@@ -20,18 +25,17 @@ const Db = require('tingodb')().Db;
 const db = new Db(__dirname + '/tingodb', {});
 const ObjectID = require('tingodb')().ObjectID;
 
-//passwordhash
+//passwordhash initialisieren
 const passwordHash = require("password-hash");
 
 // Wichtig sonst funktionieren die eingebunden dateien nicht
 app.use(express.static(__dirname + "/public"));
 
 app.listen(3000, function(){
-	console.log("listening on 3000");
-	
-	
+	console.log("listening on 3000");	
 });
 
+//get requestst
 app.get("/" , (request, response) => {
 	let authenticated = request.session['authenticated'];
 	response.render("index",{"authenticated" : authenticated});
