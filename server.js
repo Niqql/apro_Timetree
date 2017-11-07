@@ -37,6 +37,11 @@ app.get("/" , (request, response) => {
 	response.render("index",{"authenticated" : authenticated});
 });
 
+app.get("/daten" , (request, response) => {
+	let authenticated = request.session['authenticated'];
+	response.render("data",{"authenticated" : authenticated});
+});
+
 app.get("/erstellen" , (request, response) => {
 	let authenticated = request.session['authenticated'];
 	response.render("create",{"authenticated" : authenticated});
