@@ -81,7 +81,7 @@ header{
 
 #main-nav{
 	display:none;
-	height:10em;
+	height:18em;
 	width: 13em;
 	background-color: #6081a2;
 	float:right;
@@ -142,22 +142,11 @@ header{
 	flex-direction: column;
 	justify-content: center;
 }
-
+/*Index Text and Error Messages*/
 #content p{
 	font-size:1.5em;
 }
-#start{
-	background-color: #f0f0f0;
-	color: #494949;
-	width: 9.375em;
-	height: 9.375em;
-}
-
-#start:hover{
-	background-color: #494949;
-	color: #f0f0f0
-}
-
+/* Register Form and Update Form*/
 #content form input:first-child{
 	margin-top: 0.625em;
 }
@@ -184,6 +173,20 @@ header{
 .register-button:hover{
 	background-color: #494949;
 	color: #f0f0f0
+}
+/*Index if authenticated*/
+#work{
+	background-color: #ffffff;
+	width:40%;
+	float: left;
+	margin-left: 10%
+}
+
+#project{
+	background-color: #f0f0f0;
+	width: 40%;
+	float: right;
+	margin-right: 10% 
 }
 
 /*Footer*/
