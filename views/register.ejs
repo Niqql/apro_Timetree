@@ -54,9 +54,10 @@
 		<div id="content">
 			<h1>Registrierung</h1>
 			<form action="/sendregister" method="post">
-				<input class="register-form" type="text" placeholder="Benutzername" name="username"><br>
+				<input class="register-form" type="text" placeholder="Benutzername" name="username" value="<%= username %>"><br>
 				<input class="register-form" type="password" placeholder="Passwort" name="passwordset"><br>
-				<button class="register-button" type="submit">Registrieren</button>
+				<input class="register-form" type="password" placeholder="Passwort wiederholen" name="repPasswordset"><br>
+				<button class="register-button" type="submit">Senden</button>
 			</form>
 		</div>
 	</section>

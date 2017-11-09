@@ -75,7 +75,17 @@
 	<section id="main">
 		<div id="content">
 		<% if(authenticated) { %>
-		
+		<form action="/sendupdate" method="post">
+				<input class="register-form" type="text" placeholder="Benutzername" name="username" value="<%= username %>"><br>
+				<input class="register-form" type="password" placeholder="Neues Passwort" name="newPasswordset" value="<%= password %>"><br>
+				<input class="register-form" type="password" placeholder="Passwort wiederholen" name="repPasswordset"><br>
+				<button class="register-button" type="submit">Senden</button>
+			</form>
+			<br />
+                <br />
+                <% for (let i = 0; i < errors.length; i++) { %>
+                    <p> <%= errors[i] %> </p>
+                <% } %>
 		<% } else{ %>
 		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
 			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
