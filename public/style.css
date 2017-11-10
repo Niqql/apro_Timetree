@@ -176,19 +176,66 @@ header{
 }
 /*Index if authenticated*/
 #work{
-	background-color: #ffffff;
+	width:40%;
+	float: left;
+	margin-left: 10%
+}
+#work table{
+	margin: 2em auto;
+}
+
+#project{
+	width: 40%;
+	float: right;
+	margin-right: 10% 
+}
+#project table{
+	border-collapse: collapse;
+	width:100%
+}
+#project .timetable{
+	border: 1px solid black;
+	margin: 2em auto;
+}
+
+/* Create */
+.project-input{
+	margin-top: 1em;
+	color:black;
+	padding: 0.625em;
+	width: 25em;
+}
+
+.project-area{
+	margin-top: 1em;
+	width: 36.5em;
+	height: 10em;
+	resize: none;
+}
+
+/*Tracking*/
+#arrive{
 	width:40%;
 	float: left;
 	margin-left: 10%
 }
 
-#project{
-	background-color: #f0f0f0;
+#track{
 	width: 40%;
 	float: right;
 	margin-right: 10% 
 }
 
+/*Overview*/
+
+#overtable{
+	border-collapse: collapse;
+	width:50%
+}
+.overview{
+	border: 1px solid black;
+	margin: 2em auto;
+}
 /*Footer*/
 footer{
 	width: 100%;

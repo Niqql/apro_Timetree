@@ -75,6 +75,7 @@
 	<section id="main">
 		<div id="content">
 		<% if(authenticated) { %>
+		<h1>Benutzerdaten ändern</h1>
 		<form action="/sendupdate" method="post">
 				<input class="register-form" type="text" placeholder="Benutzername" name="username" value="<%= username %>"><br>
 				<input class="register-form" type="password" placeholder="Neues Passwort" name="newPasswordset" value="<%= password %>"><br>

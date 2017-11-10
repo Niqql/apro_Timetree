@@ -75,7 +75,13 @@
 	<section id="main">
 		<div id="content">
 		<% if(authenticated) { %>
-		
+			<h1>Projekt erstellen</h1>
+			<form action="/createproject" method="post">
+				<input class="project-input" tabindex="1" type="text" placeholder="Projektname" name="projectname" ><br>
+				<input class="project-input" tabindex="2" type="text" placeholder="Teilnehmer" name="participant" value="<%= username %>"><br>
+				<textarea class="project-area" tabindex="3" placeholder="Beschreibung" name="description"></textarea><br>
+				<button class="register-button" type="submit">Erstellen</button>
+			</form>
 		<% } else{ %>
 		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
 			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>

@@ -56,7 +56,13 @@ app.get("/daten" , (request, response) => {
 
 app.get("/erstellen" , (request, response) => {
 	let authenticated = request.session.authenticated;
-	response.render("create",{"authenticated" : authenticated});
+	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+        if(error) return console.log(error);
+		response.render("create",{
+			"authenticated" : authenticated,
+			"username" : result.user
+			});
+	});
 });
 
 app.get("/registrieren" , (request, response) => {

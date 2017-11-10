@@ -82,16 +82,24 @@
 		<div id="content">
 		<% if(authenticated) { %>
 		<div id="work">
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,<br>
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<br>
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br>
-			At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			<h1>Wochenstatistik</h1>
+			
+			<table>
+			<tr><td>Soll:</td><td>11h</td></tr>
+			<tr><td>Ist:</td><td>1h</td></tr>
+			<tr><td>Diff.:</td><td>-10h</td></tr>
+			</table>
 		</div>
 		<div id="project">
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,<br>
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<br>
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br>
-			At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.			
+			<h1>Projektzeiten</h1>
+			
+			<table class="timetable">
+			<tr class="timetable"><th class="timetable">Datum</th><th class="timetable">Projekt</th><th class="timetable">Zeit</th><th class="timetable">Kommentar</th></tr>
+			<tr class="timetable"><td class="timetable">9.9.17</td><td class="timetable">Aprg</td><td class="timetable">2,5h</td><td class="timetable">Meilenstein</td></tr>
+			<tr class="timetable"><td class="timetable">12.9.17</td><td class="timetable">MGD2</td><td class="timetable">4h</td><td class="timetable">Konzeption</td></tr>
+			<tr class="timetable"><td class="timetable">21.9.17</td><td class="timetable">Aprg</td><td class="timetable">12h</td><td class="timetable">Backend</td></tr>
+			<tr class="timetable"><td class="timetable">20.10.17</td><td class="timetable">Aprg</td><td class="timetable">1h</td><td class="timetable">Vorstellung</td></tr>
+			</table>
 		</div>
 		<% } else{ %>		
 			<h1>Willkommen beim Aufwandslog</h1>

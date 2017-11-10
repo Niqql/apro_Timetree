@@ -75,7 +75,16 @@
 	<section id="main">
 		<div id="content">
 		<% if(authenticated) { %>
-		
+			<h1>Projektübersicht</h1>
+			
+			
+			<table id="overtable" class="overview">
+			<tr class="overview"><th class="overview">Datum</th><th class="overview">Projekt</th><th class="overview">Zeit</th><th class="overview">Kommentar</th></tr>
+			<tr class="overview"><td class="overview">9.9.17</td><td class="overview">Aprg</td><td class="overview">2,5h</td><td class="overview">Meilenstein</td></tr>
+			<tr class="overview"><td class="overview">12.9.17</td><td class="overview">MGD2</td><td class="overview">4h</td><td class="overview">Konzeption</td></tr>
+			<tr class="overview"><td class="overview">21.9.17</td><td class="overview">Aprg</td><td class="overview">12h</td><td class="overview">Backend</td></tr>
+			<tr class="overview"><td class="overview">20.10.17</td><td class="overview">Aprg</td><td class="overview">1h</td><td class="overview">Vorstellung</td></tr>
+			</table>
 		<% } else{ %>
 		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
 			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
