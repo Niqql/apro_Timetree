@@ -76,7 +76,21 @@
 		<div id="content">
 		<% if(authenticated) { %>
 			<h1>Projektübersicht</h1>
-			
+			<form>
+			<input type="search" list="Projekte">
+			<datalist id="Projekte">
+			<option value="Amsel">
+			<option value="Buntspecht">
+			<option value="Drossel">
+			<option value="Eisvogel">
+			<option value="Fink">
+			<option value="Graugans">
+			<option value="Meise"> 
+			<option value="Spatz"> 
+			<option value="Specht">
+			</datalist>
+			<button>Auswählen</button>
+			</form>
 			
 			<table id="overtable" class="overview">
 			<tr class="overview"><th class="overview">Datum</th><th class="overview">Projekt</th><th class="overview">Zeit</th><th class="overview">Kommentar</th></tr>

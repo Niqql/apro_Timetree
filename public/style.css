@@ -216,14 +216,35 @@ header{
 /*Tracking*/
 #arrive{
 	width:40%;
+	height:100%;
 	float: left;
-	margin-left: 10%
+	margin-left: 10%;
+	padding-top:5em;
+}
+.general-input{
+	margin-top: 1em;
+	color:black;
+	padding: 0.625em;
+	width: 25em;
 }
 
+.description{
+	float:left;
+}
 #track{
 	width: 40%;
 	float: right;
 	margin-right: 10% 
+}
+
+#watch{
+	margin: 1em auto;
+}
+.track-input{
+	margin-top: 1em;
+	color:black;
+	padding: 0.625em;
+	width: 25em;
 }
 
 /*Overview*/

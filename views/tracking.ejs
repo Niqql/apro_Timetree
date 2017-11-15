@@ -13,10 +13,107 @@
 							$('#main-nav').slideToggle('slow');
 			});
 		});
+		
+		//	Simple example of using private variables
+	//
+	//	To start the stopwatch:
+	//		obj.start();
+	//
+	//	To get the duration in milliseconds without pausing / resuming:
+	//		var	x = obj.time();
+	//
+	//	To pause the stopwatch:
+	//		var	x = obj.stop();	// Result is duration in milliseconds
+	//
+	//	To resume a paused stopwatch
+	//		var	x = obj.start();	// Result is duration in milliseconds
+	//
+	//	To reset a paused stopwatch
+	//		obj.stop();
+	//
+	var	clsStopwatch = function() {
+			// Private vars
+			var	startAt	= 0;	// Time of last start / resume. (0 if not running)
+			var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
+
+			var	now	= function() {
+					return (new Date()).getTime(); 
+				}; 
+	 
+			// Public methods
+			// Start or resume
+			this.start = function() {
+					startAt	= startAt ? startAt : now();
+				};
+
+			// Stop or pause
+			this.stop = function() {
+					// If running, update elapsed time otherwise keep it
+					lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+					startAt	= 0; // Paused
+				};
+
+			// Reset
+			this.reset = function() {
+					lapTime = startAt = 0;
+				};
+
+			// Duration
+			this.time = function() {
+					return lapTime + (startAt ? now() - startAt : 0); 
+				};
+		};
+
+	var x = new clsStopwatch();
+	var $time;
+	var clocktimer;
+
+	function pad(num, size) {
+		var s = "0000" + num;
+		return s.substr(s.length - size);
+	}
+
+	function formatTime(time) {
+		var h = m = s = ms = 0;
+		var newTime = '';
+
+		h = Math.floor( time / (60 * 60 * 1000) );
+		time = time % (60 * 60 * 1000);
+		m = Math.floor( time / (60 * 1000) );
+		time = time % (60 * 1000);
+		s = Math.floor( time / 1000 );
+
+		newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2);
+		return newTime;
+	}
+
+	function show() {
+		$time = document.getElementById('time');
+		update();
+	}
+
+	function update() {
+		$time.innerHTML = formatTime(x.time());
+	}
+
+	function start() {
+		clocktimer = setInterval("update()", 1);
+		x.start();
+	}
+
+	function stop() {
+		x.stop();
+		clearInterval(clocktimer);
+	}
+
+	function reset() {
+		stop();
+		x.reset();
+		update();
+	}
 	</script>
 </head>
-
-<body>
+<body onload="show();">
 	<header>
 		<div id="home">
 			<a href="/">
@@ -77,16 +174,27 @@
 		<% if(authenticated) { %>
 			<h1>Zeiterfassung</h1>
 			<div id="arrive">
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+				<form action="/generaltrack" method="post">
+				<p class="description">Ankunft:</p>
+				<input class="general-input" tabindex="1" type="time" placeholder="00:00:00" name="arrival" ><br>
+				<p class="description">Abkunft:</p>
+				<input class="general-input" tabindex="2" type="time" placeholder="00:00:00" name="departure"><br>
+				<button class="register-button" type="submit">Senden</button>
+				</form>
 			</div>
 			<div id="track">
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-			sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.	
+				<div id="watch">Time: <span id="time"></span></div>
+				<input class="button" type="button" value="Start" onclick="start();">
+				<input class="button" type="button" value="Stop" onclick="stop();">
+				<input class="button" type="button" value="Reset" onclick="reset()">
+				
+				<form action="/trackproject" method="post">
+				<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
+				<input class="track-input" tabindex="4" type="text" placeholder="Zeit" name="time"><br>
+				<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
+				<input class="track-input" tabindex="6" type="text" placeholder="Projekt" name="project"><br>
+				<button class="register-button" type="submit">Senden</button>
+				</form> 
 			</div>
 		<% } else{ %>
 			<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
