@@ -53,7 +53,7 @@
 				<li><a href="/impressum">Impressum</a></li>
 				<li>
 					<form action="/logout" method="post">
-						<button type="submit">Logout</button>
+						<button id="logout" type="submit">Logout</button>
 					</form>
 				</li>
 			</ul>
@@ -77,18 +77,13 @@
 		<% if(authenticated) { %>
 			<h1>Projektübersicht</h1>
 			<form>
-			<input type="search" list="Projekte">
-			<datalist id="Projekte">
-			<option value="Amsel">
-			<option value="Buntspecht">
-			<option value="Drossel">
-			<option value="Eisvogel">
-			<option value="Fink">
-			<option value="Graugans">
-			<option value="Meise"> 
-			<option value="Spatz"> 
-			<option value="Specht">
-			</datalist>
+			<label>Projekt:
+				<select name="project">
+					<option>Aprg</option>
+					<option>MGD2</option>
+					<option>Dramaturgie2</option>
+				</select>
+			</label>
 			<button>Auswählen</button>
 			</form>
 			

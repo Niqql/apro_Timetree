@@ -51,7 +51,11 @@
 				<li><a href="/uebersicht">Übersicht</a></li>
 				<li><a href="/daten">Benutzerdaten ändern</a></li>
 				<li><a href="/impressum">Impressum</a></li>
-				<li><a href="/logout">Ausloggen</a></li>
+				<li>
+					<form action="/logout" method="post">
+						<button id="logout" type="submit">Logout</button>
+					</form>
+				</li>
 			</ul>
 		</nav>
 		<div id="menubar">

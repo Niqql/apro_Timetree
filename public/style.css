@@ -132,6 +132,15 @@ header{
 	color: #f0f0f0
 }
 
+#logout{
+	background:none!important;
+    border:none; 
+    padding:0!important;
+	cursor: pointer;
+	color:#BFBFBF;
+	font: inherit;
+}
+
 /*Content*/
 #main{
 	background: url(img/bg.png);
