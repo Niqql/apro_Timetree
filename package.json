@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node server.js",
+	"dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +17,8 @@
     "express-session": "^1.15.5",
     "mongodb": "^2.2.31",
     "password-hash": "^1.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
