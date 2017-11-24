@@ -189,11 +189,16 @@
 				<input class="button" type="button" value="Reset" onclick="reset()">
 				
 				<form action="/trackproject" method="post">
-				<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
-				<input class="track-input" tabindex="4" type="text" placeholder="Zeit" name="time"><br>
-				<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
-				<input class="track-input" tabindex="6" type="text" placeholder="Projekt" name="project"><br>
-				<button class="register-button" type="submit">Senden</button>
+					<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
+					<input class="track-input" tabindex="4" type="text" placeholder="Zeit" name="time"><br>
+					<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
+					<select class="track-input" tabindex="6" placeholder="Projekt" name="project">
+						<% for(var i = 0; i < projectList.length; i++) { %>
+						<option value="<%= projectList[i] %>"><%= projectList[i] %></option>
+						<% } %>
+					</select>
+					<!-- <input class="track-input" tabindex="6" type="text" placeholder="Projekt" name="project"> --><br>
+					<button class="register-button" type="submit">Senden</button>
 				</form> 
 			</div>
 		<% } else{ %>
