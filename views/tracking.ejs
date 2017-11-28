@@ -170,14 +170,14 @@
 		<% } %>
 	</header>
 	<section id="main">
-		<div id="content">
+		<div id="contenttrack">
 		<% if(authenticated) { %>
 			<h1>Zeiterfassung</h1>
 			<div id="arrive">
 				<form action="/generaltrack" method="post">
-				<p class="description">Ankunft:</p>
+				<h4 class="description">Ankunft:</h4><br>
 				<input class="general-input" tabindex="1" type="time" placeholder="00:00:00" name="arrival" ><br>
-				<p class="description">Abkunft:</p>
+				<h4 class="description">Abkunft:</h4><br>
 				<input class="general-input" tabindex="2" type="time" placeholder="00:00:00" name="departure"><br>
 				<button class="register-button" type="submit">Senden</button>
 				</form>
@@ -189,8 +189,10 @@
 				<input class="button" type="button" value="Reset" onclick="reset()">
 				
 				<form action="/trackproject" method="post">
+					<h4 class="description">Datum:</h4><br>
 					<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
-					<input class="track-input" tabindex="4" type="text" placeholder="Zeit" name="time"><br>
+					<h4 class="description">Zeit:</h4><br>
+					<input class="track-input" tabindex="4" type="time" placeholder="Zeit" name="time"><br>
 					<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
 					<select class="track-input" tabindex="6" placeholder="Projekt" name="project">
 						<% for(var i = 0; i < projectList.length; i++) { %>

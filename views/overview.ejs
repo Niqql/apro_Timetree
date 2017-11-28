@@ -73,10 +73,10 @@
 		<% } %>
 	</header>
 	<section id="main">
-		<div id="content">
+		<div id="contentoverview">
 		<% if(authenticated) { %>
 			<h1>Projektübersicht</h1>
-			<form action="/overviewSelectProject" method="post">
+			<form id="projectSelection" action="/overviewSelectProject" method="post">
 				<label>Projekt:
 					<select name="project">
 						<% for(var i = 0; i < projectList.length; i++) { %>
@@ -84,11 +84,12 @@
 						<% } %>
 					</select>
 				</label>
-				<button>Auswählen</button>
+				<button class="send-button">Auswählen</button>
 			</form>
-			<% if (times.length > 0) { %>
-			<h2><%= projectName %></h2>
+			
+			<h2 class="overproject"><%= projectName %></h2>
 			<p><%= projectDescription %></p>
+			<% if (times.length > 0) { %>
 			<table id="overtable" class="overview">
 				<tr class="overview">
 					<th class="overview">Datum</th>

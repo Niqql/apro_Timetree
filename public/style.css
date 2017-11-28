@@ -10,7 +10,7 @@ html, body{
 	height:100%;
 	text-align: center;
 	font-size: 100%;
-	background-color: #968080;
+	background-color: #6081a2;
 	overflow-x:hidden;
 }
 
@@ -222,7 +222,14 @@ header{
 	resize: none;
 }
 
+.descriptionCreate{
+	float:left;
+	margin-left:27.5%
+}
 /*Tracking*/
+#contenttrack{
+	margin-top:4em
+}
 #arrive{
 	width:40%;
 	height:100%;
@@ -239,6 +246,7 @@ header{
 
 .description{
 	float:left;
+	margin-left:2.5em 
 }
 #track{
 	width: 40%;
@@ -257,7 +265,30 @@ header{
 }
 
 /*Overview*/
+#contentoverview{
+	margin-top:4em
+}
 
+#projectSelection{
+	margin-top: 2em
+}
+
+select{
+	color:black;
+	padding: 0.625em;
+	width: 15em
+}
+
+.overproject{
+	margin-top: 1em;
+}
+
+.send-button{
+	background-color: #f0f0f0;
+	color: #494949;
+	width:10em;
+	height: 2.25em;
+}
 #overtable{
 	border-collapse: collapse;
 	width:50%

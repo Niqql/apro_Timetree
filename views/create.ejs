@@ -77,8 +77,10 @@
 		<% if(authenticated) { %>
 			<h1>Projekt erstellen</h1>
 			<form action="/createproject" method="post">
-				<input class="project-input" tabindex="1" type="text" placeholder="Projektname" name="projectname" ><br>
-				<input class="project-input" tabindex="2" type="text" placeholder="Teilnehmer" name="participant" value="<%= username %>"><br>
+				<h4 class="descriptionCreate">Projektname:</h4><br>
+				<input class="project-input" tabindex="1" type="text" name="projectname" ><br>
+				<h4 class="descriptionCreate">Teilnehmer:</h4><br>
+				<input class="project-input" tabindex="2" type="text" name="participant" value="<%= username %>"><br>
 				<textarea class="project-area" tabindex="3" placeholder="Beschreibung" name="description"></textarea><br>
 				<button class="register-button" type="submit">Erstellen</button>
 			</form>
