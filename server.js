@@ -75,17 +75,22 @@ app.get("/registrieren" , (request, response) => {
 });
 
 app.get("/zeiterfassung" , (request, response) => {
-	let authenticated = request.session.authenticated;
-	var projectList = [];
-	db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
-    	if (err) return console.log(err);
-    	console.log(result);
-    	for (var i = 0; i < result.length; i++) {
-    		projectList.push(result[i].projectName);
-    	}
-    	response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
- 	});
-	
+	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+        if(error) return console.log(error);
+		let authenticated = request.session.authenticated;
+		var projectList = [];
+		var user = result.user;
+		db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
+	    	if (err) return console.log(err);
+	    	console.log(result);
+	    	for (var i = 0; i < result.length; i++) {
+	    		if (result[i].participants.includes(user)) {
+	    			projectList.push(result[i].projectName);
+	    		}
+	    	}
+	    	response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
+	 	});
+	});
 });
 
 app.get("/impressum" , (request, response) => {
@@ -101,7 +106,7 @@ app.get("/uebersicht" , (request, response) => {
     	for (var i = 0; i < result.length; i++) {
     		projectList.push(result[i].projectName);
     	}
-    	response.render("overview",{"authenticated" : authenticated, "projectList": projectList});
+    	response.render("overview",{"authenticated" : authenticated, "projectList": projectList, "projectName": "", "projectDescription" : "", "times" : []});
  	});
 });
 
@@ -125,16 +130,12 @@ app.post("/sendregister" , (request, response) =>{
 	const PWrepeat = request.body.repPasswordset;
 	const hashPW = passwordHash.generate(password);
 	const document = { 'user' : user, 'password' : hashPW,'projects':[]};
-	var check = true;	
 	
 	if(user != "" && password != "" && password == PWrepeat){	
 		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
 			console.log(result);
 			if(err){console.log(err);}
-			if(result != null){
-				check = false;			
-			}
-			if(check){
+			if(result == null){
 				db.collection(DB_COLLECTION).save(document, (err, result) => {
 					if (err) {
 						error_id = 0;
@@ -164,17 +165,12 @@ app.post("/sendregister" , (request, response) =>{
 app.post("/login" , (request, response) =>{
 	const user = request.body.user;
 	const password = request.body.password;
-	var check = true;
 	
 	if(user != "" | password !=""){
 		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
 			console.log(result);
 			if(err){console.log(err);}
-			if(result == null | result == undefined){
-				check = false;			
-			}		
-			console.log(check);
-			if(check){
+			if(result != null | result != undefined){
 				if(user == result.user && passwordHash.verify(password, result.password) ){
 					request.session.authenticated = true ;
 					request.session.userID = result._id;
@@ -304,39 +300,66 @@ app.post("/createproject", (request, response) => {
 //create project handler
 app.post("/trackproject", (request, response) => {
 	let authenticated = request.session.authenticated;
-    const date = request.body.date;
-    const time = request.body.time;
-    const comment = request.body.comment;
-    const projectName = request.body.project;
-    const document = { 'date' : date, 'time' : time, 'comment' : comment};	
-	
-	if(date != "" && time != "" && projectName != ""){	
-		db.collection(DB_PROJECT_COLLECTION).findOne({"projectName":projectName}, (err, result) => {
-			console.log(result);
-			if(err){console.log(err);}
-			if(result != null){
-				result.time.push(document);
-				db.collection(DB_PROJECT_COLLECTION).update({'projectName': projectName}, result, (error, result) => {
-					if (err) {
-						error_id = 7;
-						back_id = 4;
+	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+        if(error) return console.log(error);
+	    const date = request.body.date;
+	    const time = request.body.time;
+	    const comment = request.body.comment;
+	    const projectName = request.body.project;
+	    const document = { 'date' : date, 'time' : time, 'comment' : comment, 'user': result.user};
+		
+		if(date != "" && time != "" && projectName != ""){	
+			db.collection(DB_PROJECT_COLLECTION).findOne({"projectName":projectName}, (err, result) => {
+				console.log(result);
+				if(err){console.log(err);}
+				if(result != null){
+					result.time.push(document);
+					db.collection(DB_PROJECT_COLLECTION).update({'projectName': projectName}, result, (error, result) => {
+						if (err) {
+							error_id = 7;
+							back_id = 4;
+							response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
+						}
+						error_id = 8;
+						back_id = 2;
 						response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
-					}
-					error_id = 8;
-					back_id = 2;
+					});
+				}
+				else{
+					error_id = 7;
+					back_id = 4;
 					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
-				});
-			}
-			else{
-				error_id = 7;
-				back_id = 4;
-				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
-			}
-		});
-	}
-	else{
-		error_id = 7;
-		back_id = 4;
-		response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
-	}
+				}
+			});
+		}
+		else{
+			error_id = 7;
+			back_id = 4;
+			response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
+		}
+	});
+});
+
+//select overview project
+app.post("/overviewSelectProject", (request, response) => {
+	let authenticated = request.session.authenticated;
+	const project = request.body.project;
+	var projectList = [];
+	var times = [];
+	var projectDescription;
+	db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
+    	if (err) return console.log(err);
+    	console.log(result);
+    	for (var i = 0; i < result.length; i++) {
+    		projectList.push(result[i].projectName);
+    	}
+    	for (var i = 0; i < result.length; i++) {
+    		if (result[i].projectName == project) {
+    			times = result[i].time;
+    			projectDescription = result[i].description;
+    		}
+    	}
+    	console.log("1" + project);
+    	response.render("overview",{"authenticated" : authenticated, "projectList": projectList, "projectName" : project, "projectDescription" : projectDescription, "times" : times });
+ 	});
 });

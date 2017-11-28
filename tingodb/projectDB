@@ -1,3 +1,27 @@
-{"k":"0000000078","o":"0000000112","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511513697337,"_s":"b50d8bf14001e913cf3426c8cdae30d8"}
-{"projectName":"Testprojekt","participants":["hak"],"description":"Moin","time":[],"_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000426","v":"001"}
+{"_id":2,"_uid":2,"_dt":1511517618649,"_s":"fa193555160b6f3dd8c616012d50c5db"}
+{"projectName":"Testitest","participants":["hak"],"description":"lol","time":[{"date":"2017-11-24","time":"uzuzu","comment":"hallo"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"dfg","comment":"sdfg"},{"date":"2017-11-24","time":"fsdg","comment":"fdhgj"},{"date":"2017-11-24","time":"s<","comment":"dtfz"}],"_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000494","v":"001"}
+{"_id":2,"_uid":2,"_dt":1511517841309,"_s":"7c734e82da5172e69954614f0ec7f92e"}
+{"projectName":"Testitest","participants":["hak"],"description":"lol","time":[{"date":"2017-11-24","time":"uzuzu","comment":"hallo"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"dfg","comment":"sdfg"},{"date":"2017-11-24","time":"fsdg","comment":"fdhgj"},{"date":"2017-11-24","time":"s<","comment":"dtfz"},{"date":"2017-11-24","time":"wertz","comment":"wertz","user":"hak"}],"_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000115","v":"001"}
+{"_id":3,"_uid":3,"_dt":1511520130743,"_s":"dfc43ab5e6141d345ebf5a5bba2c6a79"}
+{"projectName":"dsfa","participants":["hak","Batman"],"description":"sadf","time":[],"_id":{"$wrap":"$oid","v":3}}
+{"k":"0000000078","o":"0000000111","v":"001"}
+{"_id":4,"_uid":4,"_dt":1511520142401,"_s":"64b9dc834c4fd155bf2cafbecb869997"}
+{"projectName":"lololol","participants":["Batman"],"description":"asdf","time":[],"_id":{"$wrap":"$oid","v":4}}
+{"k":"0000000078","o":"0000000154","v":"001"}
+{"_id":5,"_uid":5,"_dt":1511520600965,"_s":"294cd2fe99442d69f964cad20a204c9d"}
+{"projectName":"Timetree","participants":["hak","Thore","Felix","Michi","Niklas"],"description":"Wir haben Spaß!","time":[],"_id":{"$wrap":"$oid","v":5}}
+{"k":"0000000078","o":"0000000243","v":"001"}
+{"_id":5,"_uid":5,"_dt":1511520638826,"_s":"661e787981e4a268e95758e7b496eb0d"}
+{"projectName":"Timetree","participants":["hak","Thore","Felix","Michi","Niklas"],"description":"Wir haben Spaß!","time":[{"date":"2017-11-24","time":"4","comment":"Ja, so paar server.js sachen yo","user":"hak"}],"_id":{"$wrap":"$oid","v":5}}
+{"k":"0000000078","o":"0000000308","v":"001"}
+{"_id":5,"_uid":5,"_dt":1511520667607,"_s":"b0482574047527da623222e056ca475d"}
+{"projectName":"Timetree","participants":["hak","Thore","Felix","Michi","Niklas"],"description":"Wir haben Spaß!","time":[{"date":"2017-11-24","time":"4","comment":"Ja, so paar server.js sachen yo","user":"hak"},{"date":"2017-11-23","time":"51","comment":"alles","user":"hak"}],"_id":{"$wrap":"$oid","v":5}}
+{"k":"0000000078","o":"0000000582","v":"001"}
+{"_id":2,"_uid":5,"_dt":1511520872993,"_s":"5719aaff10b5e9b0c6552d2856eda754"}
+{"projectName":"Testitest","participants":["hak"],"description":"lol","time":[{"date":"2017-11-24","time":"uzuzu","comment":"hallo"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"wert","comment":"wert"},{"date":"2017-11-24","time":"dfg","comment":"sdfg"},{"date":"2017-11-24","time":"fsdg","comment":"fdhgj"},{"date":"2017-11-24","time":"s<","comment":"dtfz"},{"date":"2017-11-24","time":"wertz","comment":"wertz","user":"hak"},{"date":"2017-11-24","time":"dasfgdh","comment":"dsfgdsafghjgsaddfghjgds","user":"hak"}],"_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000225","v":"001"}
+{"_id":4,"_uid":5,"_dt":1511520986961,"_s":"448a005c1d27c7ddfab1714cc00e1f21"}
+{"projectName":"lololol","participants":["Batman"],"description":"asdf","time":[{"date":"2017-11-24","time":"2134","comment":"MUHAHAHA MEIN GANZ EIGENES PROJEKT! WHOOP WHOIOOOP","user":"Batman"}],"_id":{"$wrap":"$oid","v":4}}

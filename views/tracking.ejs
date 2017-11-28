@@ -14,6 +14,23 @@
 			});
 		});
 		
+		//	Simple example of using private variables
+	//
+	//	To start the stopwatch:
+	//		obj.start();
+	//
+	//	To get the duration in milliseconds without pausing / resuming:
+	//		var	x = obj.time();
+	//
+	//	To pause the stopwatch:
+	//		var	x = obj.stop();	// Result is duration in milliseconds
+	//
+	//	To resume a paused stopwatch
+	//		var	x = obj.start();	// Result is duration in milliseconds
+	//
+	//	To reset a paused stopwatch
+	//		obj.stop();
+	//
 	var	clsStopwatch = function() {
 			// Private vars
 			var	startAt	= 0;	// Time of last start / resume. (0 if not running)
@@ -173,7 +190,7 @@
 				
 				<form action="/trackproject" method="post">
 					<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
-					<input class="track-input" tabindex="4" type="time" placeholder="Zeit" name="time"><br>
+					<input class="track-input" tabindex="4" type="text" placeholder="Zeit" name="time"><br>
 					<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
 					<select class="track-input" tabindex="6" placeholder="Projekt" name="project">
 						<% for(var i = 0; i < projectList.length; i++) { %>

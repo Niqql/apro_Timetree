@@ -76,24 +76,36 @@
 		<div id="content">
 		<% if(authenticated) { %>
 			<h1>Projektübersicht</h1>
-			<form>
-			<label>Projekt:
-				<select name="project">
-					<option>Aprg</option>
-					<option>MGD2</option>
-					<option>Dramaturgie2</option>
-				</select>
-			</label>
-			<button>Auswählen</button>
+			<form action="/overviewSelectProject" method="post">
+				<label>Projekt:
+					<select name="project">
+						<% for(var i = 0; i < projectList.length; i++) { %>
+						<option value="<%= projectList[i] %>"><%= projectList[i] %></option>
+						<% } %>
+					</select>
+				</label>
+				<button>Auswählen</button>
 			</form>
-			
+			<% if (times.length > 0) { %>
+			<h2><%= projectName %></h2>
+			<p><%= projectDescription %></p>
 			<table id="overtable" class="overview">
-			<tr class="overview"><th class="overview">Datum</th><th class="overview">Projekt</th><th class="overview">Zeit</th><th class="overview">Kommentar</th></tr>
-			<tr class="overview"><td class="overview">9.9.17</td><td class="overview">Aprg</td><td class="overview">2,5h</td><td class="overview">Meilenstein</td></tr>
-			<tr class="overview"><td class="overview">12.9.17</td><td class="overview">MGD2</td><td class="overview">4h</td><td class="overview">Konzeption</td></tr>
-			<tr class="overview"><td class="overview">21.9.17</td><td class="overview">Aprg</td><td class="overview">12h</td><td class="overview">Backend</td></tr>
-			<tr class="overview"><td class="overview">20.10.17</td><td class="overview">Aprg</td><td class="overview">1h</td><td class="overview">Vorstellung</td></tr>
+				<tr class="overview">
+					<th class="overview">Datum</th>
+					<th class="overview">Name</th>
+					<th class="overview">Zeit</th>
+					<th class="overview">Kommentar</th>
+				</tr>
+				<% for (var i = 0; i < times.length; i++) { %>
+					<tr class="overview">
+						<td class="overview"><%= times[i].date %></td>
+						<td class="overview"><%= times[i].user %></td>
+						<td class="overview"><%= times[i].time %></td>
+						<td class="overview"><%= times[i].comment %></td>
+					</tr>
+				<% } %>
 			</table>
+			<% } %>
 		<% } else{ %>
 		<p>Dieser Bereich ist nur für eingeloggte Nutzer sichtbar. <br>
 			Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
