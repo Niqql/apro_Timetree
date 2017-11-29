@@ -1,9 +1,9 @@
-{"k":"0000000078","o":"0000000185","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511520600977,"_s":"d71485f853191d456b5d610c87d1ec87"}
-{"user":"hak","password":"sha1$b17db8c8$1$712e9f98dc9f00e724028e5b5e3c2200ff14ea4e","projects":["Test Projekt","Bla","Test2","Testitest","dsfa","Timetree"],"_id":{"$wrap":"$oid","v":2}}
-{"k":"0000000078","o":"0000000130","v":"001"}
-{"_id":3,"_uid":3,"_dt":1511520896737,"_s":"fa0adc4ba73904aa0591879155fdf312"}
-{"user":"batman","password":"sha1$ca5c554f$1$ff2003c546c795d4c2e6d8198dd5b65feed228de","projects":[],"_id":{"$wrap":"$oid","v":3}}
-{"k":"0000000078","o":"0000000130","v":"001"}
-{"_id":4,"_uid":4,"_dt":1511520940927,"_s":"5bba9993aa79e4e223074c7e78b4e2a5"}
-{"user":"Batman","password":"sha1$59053c61$1$b51f4f241163d8c508b4bf633dc487d484d681a0","projects":[],"_id":{"$wrap":"$oid","v":4}}
+{"k":"0000000078","o":"0000000137","v":"001"}
+{"_id":2,"_uid":2,"_dt":1511966233739,"_s":"47694b91992105358df8f6152d636c45"}
+{"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"00:00","_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000136","v":"001"}
+{"_id":2,"_uid":2,"_dt":1511966373102,"_s":"b35663d7e3dde183bff45cb43339400f"}
+{"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"3:10","_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000136","v":"001"}
+{"_id":2,"_uid":2,"_dt":1511968004565,"_s":"42f3c9af35026385decc6aa07ede9c99"}
+{"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"4:13","_id":{"$wrap":"$oid","v":2}}

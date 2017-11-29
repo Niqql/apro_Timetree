@@ -85,9 +85,9 @@
 			<h1>Wochenstatistik</h1>
 			
 			<table>
-			<tr><td>Soll:</td><td>11h</td></tr>
-			<tr><td>Ist:</td><td>1h</td></tr>
-			<tr><td>Diff.:</td><td>-10h</td></tr>
+			<tr><td>Soll:</td><td><%= weekSoll %></td></tr>
+			<tr><td>Ist:</td><td><%= weekIs %></td></tr>
+			<tr><td>Diff.:</td><td><%= weekDif %></td></tr>
 			</table>
 		</div>
 		<div id="project">
@@ -95,16 +95,22 @@
 			
 			<table class="timetable">
 			<tr class="timetable"><th class="timetable">Datum</th><th class="timetable">Projekt</th><th class="timetable">Zeit</th><th class="timetable">Kommentar</th></tr>
-			<tr class="timetable"><td class="timetable">9.9.17</td><td class="timetable">Aprg</td><td class="timetable">2,5h</td><td class="timetable">Meilenstein</td></tr>
-			<tr class="timetable"><td class="timetable">12.9.17</td><td class="timetable">MGD2</td><td class="timetable">4h</td><td class="timetable">Konzeption</td></tr>
-			<tr class="timetable"><td class="timetable">21.9.17</td><td class="timetable">Aprg</td><td class="timetable">12h</td><td class="timetable">Backend</td></tr>
-			<tr class="timetable"><td class="timetable">20.10.17</td><td class="timetable">Aprg</td><td class="timetable">1h</td><td class="timetable">Vorstellung</td></tr>
+			
+			<% for (var i = 0; i < projectTimes.length; i++) { %>
+			<tr class="timetable">
+				<td class="timetable"><%= projectTimes[i].date %> </td>
+				<td class="timetable"><%= projectTimes[i].user %> </td>
+				<td class="timetable"><%= projectTimes[i].time %> </td>
+				<td class="timetable"><%= projectTimes[i].comment %> </td>
+			</tr>
+			<% } %>
 			</table>
+			
 		</div>
 		<% } else{ %>		
 			<h1>Willkommen beim Aufwandslog</h1>
 
-				<p>Bitte loggen Sie sich ein oder <a href="/register">registrieren</a> Sie sich.</p>
+				<p>Bitte loggen Sie sich ein oder <a href="/registrieren">registrieren</a> Sie sich.</p>
 		<% } %>			
 		</div>
 	</section>

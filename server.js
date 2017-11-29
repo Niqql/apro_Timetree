@@ -33,14 +33,45 @@
 	// Wichtig sonst funktionieren die eingebunden dateien nicht
 	app.use(express.static(__dirname + "/public"));
 
-	app.listen(3000, function(){
-		console.log("listening on 3000");	
-	});
+	app.listen(3000, function(){console.log("listening on 3000");});
 
 //get requestst
 app.get("/" , (request, response) => {
 	let authenticated = request.session.authenticated;
-	response.render("index",{"authenticated" : authenticated});
+	let weekSoll = "20:00";
+	let weekIs;
+	let weekDif;
+	if(authenticated){
+		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+			if(error) return console.log(error);
+			var projectTimes = [];
+			var user = result.user;
+			weekIs = result.time;
+			var soll = weekSoll.split(":");
+			var is = weekIs.split(":");
+			var dif = (parseInt(soll[0])*60 + parseInt(soll[1]))-(parseInt(is[0])*60 + parseInt(is[1]));
+			weekDif = (dif-(dif%60))/60 + ":" + dif%60;
+			db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
+				if (err) return console.log(err);
+				console.log(result);
+				for (var i = 0; i < result.length; i++) {
+					if (result[i].participants.includes(user)) {
+						for (var j = 0; j < result[i].time.length; j++) {
+							if (result[i].time[j].user == user) {
+								var temp = result[i].time[j];
+								temp.user = result[i].projectName;
+								projectTimes.push(temp);
+							}
+						}
+					}
+				}
+				response.render("index",{"authenticated" : authenticated, "projectTimes" : projectTimes , "weekSoll" : weekSoll, "weekIs": weekIs, "weekDif": weekDif});
+			});
+		});
+	}
+	else{
+		response.render("index",{"authenticated" : authenticated, "projectTimes" : [] , "weekSoll" : "", "weekIs": "", "weekDif": ""});
+	}
 });
 
 app.get("/daten" , (request, response) => {
@@ -116,7 +147,9 @@ app.get("/errors" , (request, response) => {
 
 //login, registrierung, logout, Projekt erstellung
 let errors = [
-"Registrierung fehlgeschlagen!", "Login fehlgeschlagen!", "Registrierung fehlgeschlagen, bitte wählen sie einen anderen Benutzernamen.", "Registrierung erfolgreich!", "Projekterstellung fehlgeschlagen!", "Projektname schon vergeben!", "Projekterstellung erfolgreich!", "Zeiterfassung fehlgeschlagen!", "Zeiterfassung erfolgreich!"];
+"Registrierung fehlgeschlagen!", "Login fehlgeschlagen!", "Registrierung fehlgeschlagen, bitte wählen sie einen anderen Benutzernamen.", "Registrierung erfolgreich!", 
+"Projekterstellung fehlgeschlagen!", "Projektname schon vergeben!", "Projekterstellung erfolgreich!", 
+"Zeiterfassung fehlgeschlagen!", "Zeiterfassung erfolgreich!"];
 let error_id = 0;
 let backs = ["/", "/registrieren","/uebersicht", "/erstellen", "/Zeiterfassung"];
 let back_id = 0;
@@ -129,7 +162,7 @@ app.post("/sendregister" , (request, response) =>{
 	const password = request.body.passwordset;
 	const PWrepeat = request.body.repPasswordset;
 	const hashPW = passwordHash.generate(password);
-	const document = { 'user' : user, 'password' : hashPW,'projects':[]};
+	const document = { 'user' : user, 'password' : hashPW, 'time': "00:00"};
 	
 	if(user != "" && password != "" && password == PWrepeat){	
 		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
@@ -208,18 +241,19 @@ app.post("/sendupdate", (request, response) => {
     const newName = request.body.username;
     const newPW = request.body.newPasswordset;
     const repeatNewPW = request.body.repPasswordset;
-	
+	let authenticated = request.session.authenticated;
     let updateErrors = [];
 
-    if(newName == "" || newPW == "" || repeatNewPW == ""){updateErrors.push('Please fill in all the Data!');}
-    if(newPW != repeatNewPW){updateErrors.push('Passwords dont match');}
+    if(newName == "" || newPW == "" || repeatNewPW == ""){updateErrors.push('Bitte alle Daten eingeben!');}
+    if(newPW != repeatNewPW){updateErrors.push('Passwörter stimmen nicht über ein!');}
     
     if(updateErrors.length > 0)
     {
         response.render('data', {
-            'user': newName,
+            'username': newName,
             'password': newPW,
-            'errors': updateErrors
+            'errors': updateErrors,
+			'authenticated': authenticated
         });
 
         return;
@@ -256,25 +290,6 @@ app.post("/createproject", (request, response) => {
 						back_id = 3;
 						response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
 					}
-					//Projekt erfolgreich erstellt, Projekt wird in participants eingetragen
-
-				//console.log(4);
-					for(var i = 0 ; i<participants.length; i++){
-						db.collection(DB_COLLECTION).findOne({"user":participants[i]}, (err, result) => {
-							//console.log(5);
-							if(err){console.log(err);}
-							if(result != null | result != undefined){
-								var newProjects = result.projects;
-								newProjects.push(projectName);
-								result.projects = newProjects;
-								db.collection(DB_COLLECTION).update({'_id': result._id}, result, (error, result) => {
-									//response.redirect('/');
-								});
-								//console.log(6);
-							}
-						});
-					}
-					//console.log(7);
 					error_id = 6;
 					back_id = 2;
 					response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
@@ -297,7 +312,7 @@ app.post("/createproject", (request, response) => {
 	
 });
 
-//create project handler
+//track project handler
 app.post("/trackproject", (request, response) => {
 	let authenticated = request.session.authenticated;
 	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
@@ -362,4 +377,41 @@ app.post("/overviewSelectProject", (request, response) => {
     	console.log("1" + project);
     	response.render("overview",{"authenticated" : authenticated, "projectList": projectList, "projectName" : project, "projectDescription" : projectDescription, "times" : times });
  	});
+});
+
+//track weektime handler
+app.post("/generaltrack", (request, response) => {
+	let authenticated = request.session.authenticated;
+	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+        if(error) return console.log(error);
+        var arrival = request.body.arrival.split(":");
+        var departure = request.body.departure.split(":");
+	    var oldTime = result.time.split(":");
+	    newTime = [0,0];
+	    arrival[0] = parseInt(arrival[0]);
+	    departure[0] = parseInt(departure[0]);
+	    oldTime[0] = parseInt(oldTime[0]);
+	    arrival[1] = parseInt(arrival[1]);
+	    departure[1] = parseInt(departure[1]);
+	    oldTime[1] = parseInt(oldTime[1]);
+	    newTime[1] = oldTime[1] + departure[1] - arrival[1];
+	    if (newTime[1] >= 60) {
+	    	newTime[1] = newTime[1] - 60;
+	    	newTime[0] = oldTime[0] + departure[0] - arrival[0] + 1;
+	    } else {
+	    	newTime[0] = oldTime[0] + departure[0] - arrival[0];
+	    }
+	    var outp = newTime[0].toString() + ":" + newTime[1].toString();
+	    result.time =outp;
+	    db.collection(DB_COLLECTION).update({'_id': request.session.userID}, result, (error, result) => {
+			if (error) {
+				error_id = 7;
+				back_id = 4;
+				response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
+			}
+			error_id = 8;
+			back_id = 0;
+			response.render("errors", {"errors" : errors, "id" : error_id, "back" : backs, "bID" : back_id, "authenticated" : authenticated});
+		});
+	});
 });
