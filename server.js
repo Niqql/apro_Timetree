@@ -140,7 +140,7 @@ app.get("/zeiterfassung" , (request, response) => {
 		});
 	}
 	else{
-		response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
+		response.render("tracking",{"authenticated" : authenticated, "projectList": []});
 	}
 });
 
