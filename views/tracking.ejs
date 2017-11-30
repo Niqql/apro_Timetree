@@ -13,24 +13,6 @@
 							$('#main-nav').slideToggle('slow');
 			});
 		});
-		
-		//	Simple example of using private variables
-	//
-	//	To start the stopwatch:
-	//		obj.start();
-	//
-	//	To get the duration in milliseconds without pausing / resuming:
-	//		var	x = obj.time();
-	//
-	//	To pause the stopwatch:
-	//		var	x = obj.stop();	// Result is duration in milliseconds
-	//
-	//	To resume a paused stopwatch
-	//		var	x = obj.start();	// Result is duration in milliseconds
-	//
-	//	To reset a paused stopwatch
-	//		obj.stop();
-	//
 	var	clsStopwatch = function() {
 			// Private vars
 			var	startAt	= 0;	// Time of last start / resume. (0 if not running)
@@ -87,6 +69,19 @@
 		return newTime;
 	}
 
+	function formatEvenTime(time) {
+		var h = m = 0;
+		var newTime = '';
+
+		h = Math.floor( time / (60 * 60 * 1000) );
+		time = time % (60 * 60 * 1000);
+		m = Math.floor( time / (60 * 1000) );
+		time = time % (60 * 1000);
+
+		newTime = pad(h, 2) + ':' + pad(m, 2);
+		return newTime;
+	}
+
 	function show() {
 		$time = document.getElementById('time');
 		update();
@@ -94,6 +89,8 @@
 
 	function update() {
 		$time.innerHTML = formatTime(x.time());
+		console.log(formatTime(x.time()));
+		$(".scip").val(formatEvenTime(x.time()));
 	}
 
 	function start() {
@@ -190,9 +187,9 @@
 				
 				<form action="/trackproject" method="post">
 					<h4 class="description">Datum:</h4><br>
-					<input class="track-input" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
+					<input class="track-input today" tabindex="3" type="date" placeholder="Datum" name="date" ><br>
 					<h4 class="description">Zeit:</h4><br>
-					<input class="track-input" tabindex="4" type="time" placeholder="Zeit" name="time"><br>
+					<input class="track-input scip" tabindex="4" type="time" placeholder="Zeit" name="time"><br>
 					<input class="track-input" tabindex="5" type="text" placeholder="Kommentar" name="comment"><br>
 					<select class="track-input" tabindex="6" placeholder="Projekt" name="project">
 						<% for(var i = 0; i < projectList.length; i++) { %>

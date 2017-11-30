@@ -1,6 +1,0 @@
-{"k":"0000000078","o":"0000000151","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511966300766,"_s":"c615e59418ccd327008de20e9035c1f1"}
-{"projectName":"TimeTree","participants":["Thore.August"],"description":"Erstellung eines Zeitmanagementtools.","time":[],"_id":{"$wrap":"$oid","v":2}}
-{"k":"0000000078","o":"0000000231","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511966333910,"_s":"b0e83eb72de1b4b003dc7c655cd0a6ac"}
-{"projectName":"TimeTree","participants":["Thore.August"],"description":"Erstellung eines Zeitmanagementtools.","time":[{"date":"2017-11-29","time":"02:30","comment":"Finishing","user":"Thore.August"}],"_id":{"$wrap":"$oid","v":2}}

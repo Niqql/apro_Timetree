@@ -20,7 +20,7 @@ app.use(session({
 	}));
 
 //TingoDB initialisieren
-const DB_COLLECTION = "treeDB";
+const DB_USER_COLLECTION = "userDB";
 const DB_PROJECT_COLLECTION = "projectDB";
 const Db = require('tingodb')().Db;
 const db = new Db(__dirname + '/tingodb', {});
@@ -41,7 +41,7 @@ app.get("/" , (request, response) => {
 	let weekIs;
 	let weekDif;
 	if(authenticated){
-		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
 			if(error) return console.log(error);
 			var projectTimes = [];
 			var user = result.user;
@@ -75,7 +75,7 @@ app.get("/" , (request, response) => {
 app.get("/daten" , (request, response) => {
 	let authenticated = request.session.authenticated;
 	if(authenticated){
-		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
 			if(error) return console.log(error);
 			response.render("data",{
 				"authenticated" : authenticated,
@@ -98,7 +98,7 @@ app.get("/daten" , (request, response) => {
 app.get("/erstellen" , (request, response) => {
 	let authenticated = request.session.authenticated;
 	if(authenticated){
-		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (err, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (err, result) => {
 			if(err) return console.log(err);
 			response.render("create",{
 				"authenticated" : authenticated,
@@ -121,7 +121,7 @@ app.get("/registrieren" , (request, response) => {
 app.get("/zeiterfassung" , (request, response) => {
 	let authenticated = request.session.authenticated;
 	if(authenticated){
-		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
 			if(error) return console.log(error);		
 			var projectList = [];
 			var user = result.user;
@@ -181,10 +181,10 @@ app.post("/sendregister" , (request, response) =>{
 	const document = { 'user' : user, 'password' : hashPW, 'time': "00:00"};
 	
 	if(user != "" && password != "" && password == PWrepeat){	
-		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({"user":user}, (err, result) => {
 			if(err){console.log(err);}
 			if(result == null){
-				db.collection(DB_COLLECTION).save(document, (err, result) => {
+				db.collection(DB_USER_COLLECTION).save(document, (err, result) => {
 					if (err) {
 						error_id = 0;
 						back_id = 1;
@@ -215,7 +215,7 @@ app.post("/login" , (request, response) =>{
 	const password = request.body.password;
 	
 	if(user != "" | password !=""){
-		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
+		db.collection(DB_USER_COLLECTION).findOne({"user":user}, (err, result) => {
 			if(err){console.log(err);}
 			if(result != null | result != undefined){
 				if(user == result.user && passwordHash.verify(password, result.password) ){
@@ -276,7 +276,7 @@ app.post("/sendupdate", (request, response) => {
 	const hashPW = passwordHash.generate(newPW);
     const newUser = {'user': newName, 'password': hashPW};
 
-    db.collection(DB_COLLECTION).update({'_id': request.session.userID}, newUser , (error, result) => {
+    db.collection(DB_USER_COLLECTION).update({'_id': request.session.userID}, newUser , (error, result) => {
         response.redirect('/');
     });
 });
@@ -327,7 +327,7 @@ app.post("/createproject", (request, response) => {
 //track project handler
 app.post("/trackproject", (request, response) => {
 	let authenticated = request.session.authenticated;
-	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+	db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
         if(error) return console.log(error);
 	    const date = request.body.date;
 	    const time = request.body.time;
@@ -391,7 +391,7 @@ app.post("/overviewSelectProject", (request, response) => {
 //track weektime handler
 app.post("/generaltrack", (request, response) => {
 	let authenticated = request.session.authenticated;
-	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+	db.collection(DB_USER_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
         if(error) return console.log(error);
         var arrival = request.body.arrival.split(":");
         var departure = request.body.departure.split(":");
@@ -412,7 +412,7 @@ app.post("/generaltrack", (request, response) => {
 	    }
 	    var outp = newTime[0].toString() + ":" + newTime[1].toString();
 	    result.time =outp;
-	    db.collection(DB_COLLECTION).update({'_id': request.session.userID}, result, (error, result) => {
+	    db.collection(DB_USER_COLLECTION).update({'_id': request.session.userID}, result, (error, result) => {
 			if (error) {
 				error_id = 7;
 				back_id = 4;
