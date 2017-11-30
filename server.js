@@ -76,26 +76,41 @@ app.get("/" , (request, response) => {
 
 app.get("/daten" , (request, response) => {
 	let authenticated = request.session.authenticated;
-	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
-        if(error) return console.log(error);
+	if(authenticated){
+		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+			if(error) return console.log(error);
+			response.render("data",{
+				"authenticated" : authenticated,
+				"username" : result.user,
+				'password': "",
+			'errors': []
+				});
+		});
+	}
+	else{
 		response.render("data",{
-			"authenticated" : authenticated,
-			"username" : result.user,
-            'password': "",
-		'errors': []
-			});
-	});
+				"authenticated" : authenticated,
+				"username" : "",
+				'password': "",
+			'errors': []
+				});
+	}
 });
 
 app.get("/erstellen" , (request, response) => {
 	let authenticated = request.session.authenticated;
-	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (err, result) => {
-        if(err) return console.log(err);
-		response.render("create",{
-			"authenticated" : authenticated,
-			"username" : result.user
+	if(authenticated){
+		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (err, result) => {
+			if(err) return console.log(err);
+			response.render("create",{
+				"authenticated" : authenticated,
+				"username" : result.user
 			});
-	});
+		});
+	}
+	else{
+		response.render("create",{"authenticated" : authenticated,"username" : ""});
+	}
 });
 
 app.get("/registrieren" , (request, response) => {
@@ -106,22 +121,27 @@ app.get("/registrieren" , (request, response) => {
 });
 
 app.get("/zeiterfassung" , (request, response) => {
-	db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
-        if(error) return console.log(error);
-		let authenticated = request.session.authenticated;
-		var projectList = [];
-		var user = result.user;
-		db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
-	    	if (err) return console.log(err);
-	    	console.log(result);
-	    	for (var i = 0; i < result.length; i++) {
-	    		if (result[i].participants.includes(user)) {
-	    			projectList.push(result[i].projectName);
-	    		}
-	    	}
-	    	response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
-	 	});
-	});
+	let authenticated = request.session.authenticated;
+	if(authenticated){
+		db.collection(DB_COLLECTION).findOne({'_id': request.session.userID}, (error, result) => {
+			if(error) return console.log(error);		
+			var projectList = [];
+			var user = result.user;
+			db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
+				if (err) return console.log(err);
+				console.log(result);
+				for (var i = 0; i < result.length; i++) {
+					if (result[i].participants.includes(user)) {
+						projectList.push(result[i].projectName);
+					}
+				}
+				response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
+			});
+		});
+	}
+	else{
+		response.render("tracking",{"authenticated" : authenticated, "projectList": projectList});
+	}
 });
 
 app.get("/impressum" , (request, response) => {
