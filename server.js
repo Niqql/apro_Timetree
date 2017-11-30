@@ -1,39 +1,38 @@
 //Initial
-	//express initialisieren
-	const express = require('express');
-	const app = express();
+//express initialisieren
+const express = require('express');
+const app = express();
 
-	//body parser initialisieren
-	const bodyParser = require('body-parser');
-	app.use(bodyParser.urlencoded({extended: true}));
+//body parser initialisieren
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
 
-	//ejs initialisieren
-	app.engine('.ejs', require('ejs').__express);
-	app.set('view engine', 'ejs');
+//ejs initialisieren
+app.engine('.ejs', require('ejs').__express);
+app.set('view engine', 'ejs');
 
-
-	//Session intitialisieren
-	const session = require('express-session');
-	app.use(session({ 
+//Session intitialisieren
+const session = require('express-session');
+app.use(session({ 
 		secret: 'example',
 		resave: false,
 		saveUninitialized: true
 	}));
 
-	//TingoDB initialisieren
-	const DB_COLLECTION = "treeDB";
-	const DB_PROJECT_COLLECTION = "projectDB";
-	const Db = require('tingodb')().Db;
-	const db = new Db(__dirname + '/tingodb', {});
-	const ObjectID = require('tingodb')().ObjectID;
+//TingoDB initialisieren
+const DB_COLLECTION = "treeDB";
+const DB_PROJECT_COLLECTION = "projectDB";
+const Db = require('tingodb')().Db;
+const db = new Db(__dirname + '/tingodb', {});
+const ObjectID = require('tingodb')().ObjectID;
 
-	//passwordhash initialisieren
-	const passwordHash = require("password-hash");
+//passwordhash initialisieren
+const passwordHash = require("password-hash");
 
-	// Wichtig sonst funktionieren die eingebunden dateien nicht
-	app.use(express.static(__dirname + "/public"));
+// Wichtig sonst funktionieren die eingebunden dateien nicht
+app.use(express.static(__dirname + "/public"));
 
-	app.listen(3000, function(){console.log("listening on 3000");});
+app.listen(3000, function(){console.log("listening on 3000");});
 
 //get requestst
 app.get("/" , (request, response) => {
@@ -53,7 +52,6 @@ app.get("/" , (request, response) => {
 			weekDif = (dif-(dif%60))/60 + ":" + dif%60;
 			db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
 				if (err) return console.log(err);
-				console.log(result);
 				for (var i = 0; i < result.length; i++) {
 					if (result[i].participants.includes(user)) {
 						for (var j = 0; j < result[i].time.length; j++) {
@@ -129,7 +127,6 @@ app.get("/zeiterfassung" , (request, response) => {
 			var user = result.user;
 			db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
 				if (err) return console.log(err);
-				console.log(result);
 				for (var i = 0; i < result.length; i++) {
 					if (result[i].participants.includes(user)) {
 						projectList.push(result[i].projectName);
@@ -153,7 +150,6 @@ app.get("/uebersicht" , (request, response) => {
 	var projectList = [];
 	db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
     	if (err) return console.log(err);
-    	console.log(result);
     	for (var i = 0; i < result.length; i++) {
     		projectList.push(result[i].projectName);
     	}
@@ -186,7 +182,6 @@ app.post("/sendregister" , (request, response) =>{
 	
 	if(user != "" && password != "" && password == PWrepeat){	
 		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
-			console.log(result);
 			if(err){console.log(err);}
 			if(result == null){
 				db.collection(DB_COLLECTION).save(document, (err, result) => {
@@ -221,7 +216,6 @@ app.post("/login" , (request, response) =>{
 	
 	if(user != "" | password !=""){
 		db.collection(DB_COLLECTION).findOne({"user":user}, (err, result) => {
-			console.log(result);
 			if(err){console.log(err);}
 			if(result != null | result != undefined){
 				if(user == result.user && passwordHash.verify(password, result.password) ){
@@ -299,10 +293,8 @@ app.post("/createproject", (request, response) => {
 	
 	if(projectName != "" && participant!= ""){	
 		db.collection(DB_PROJECT_COLLECTION).findOne({"projectName":projectName}, (err, result) => {
-			//console.log(2);
 			if(err){console.log(err);}
 			if(result == null){
-				//console.log(3);
 				db.collection(DB_PROJECT_COLLECTION).save(document, (err, result) => {
 					if (err) {
 						//Fehler beim erstellen vom Projekt
@@ -345,7 +337,6 @@ app.post("/trackproject", (request, response) => {
 		
 		if(date != "" && time != "" && projectName != ""){	
 			db.collection(DB_PROJECT_COLLECTION).findOne({"projectName":projectName}, (err, result) => {
-				console.log(result);
 				if(err){console.log(err);}
 				if(result != null){
 					result.time.push(document);
@@ -384,7 +375,6 @@ app.post("/overviewSelectProject", (request, response) => {
 	var projectDescription;
 	db.collection(DB_PROJECT_COLLECTION).find({}).toArray(function(err, result) {
     	if (err) return console.log(err);
-    	console.log(result);
     	for (var i = 0; i < result.length; i++) {
     		projectList.push(result[i].projectName);
     	}
@@ -394,7 +384,6 @@ app.post("/overviewSelectProject", (request, response) => {
     			projectDescription = result[i].description;
     		}
     	}
-    	console.log("1" + project);
     	response.render("overview",{"authenticated" : authenticated, "projectList": projectList, "projectName" : project, "projectDescription" : projectDescription, "times" : times });
  	});
 });

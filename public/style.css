@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+/*Grundeinstellungen*/
 *{
 	margin:0em;
 	padding:0em;
@@ -13,18 +14,15 @@ html, body{
 	background-color: #6081a2;
 	overflow-x:hidden;
 }
-
 section{
 	min-height: 100%;
 	margin:0em;
 	padding:0em;
 }
-
 h1{
 	font-weight: 800;
 	font-size: 3.250em;
 }
-
 a{
 	text-decoration: none;
 	color: black;
@@ -33,14 +31,11 @@ img {
 	height: auto;
 	max-width: 100%;
 }
-
 ul, li{
 	list-style-type: none;
 }
 
-
 /*HEADER*/
-
 header{
 	width: 100%;
 	height: 4.688em;
@@ -51,7 +46,6 @@ header{
 	box-shadow: 0 0.125em 0.188em rgba(0, 0, 0, 0.3);
 	z-index: 1;
 }
-
 #home{
 	width: 14.375em;
 	float: left;
@@ -59,11 +53,9 @@ header{
 	font-size: 1.25em;
 	font-weight: 800;
 }
-
 #home a{
 	color:#BFBFBF;
 }
-
 #home a p{
 	margin: 1em;
 }
@@ -78,7 +70,6 @@ header{
 #menubar img{
 	height: 4.063em;
 }
-
 #main-nav{
 	display:none;
 	height:18em;
@@ -99,39 +90,32 @@ header{
 	font-size: 1em;
 	color: #BFBFBF;
 }
-
 #logo{
 	float:left;
 	width: auto;
 	height:3em;
 }
-
 #login{
 	float: right;
 	margin: 0.938em 4.063em 0em 0em;
 }
-
 #login a{
 	font-size:0.75em;
 }
-
 .input-text{
 	color:black;
 	padding: 0.625em;
 }
-
 .button{
 	background-color: #f0f0f0;
 	color: #494949;
 	width: 3.938em;
 	height: 2.25em;
 }
-
 .button:hover{
 	background-color: #494949;
 	color: #f0f0f0
 }
-
 #logout{
 	background:none!important;
     border:none; 
@@ -151,10 +135,12 @@ header{
 	flex-direction: column;
 	justify-content: center;
 }
+
 /*Index Text and Error Messages*/
 #content p{
 	font-size:1.5em;
 }
+
 /* Register Form and Update Form*/
 #content form input:first-child{
 	margin-top: 0.625em;
@@ -163,14 +149,12 @@ header{
 	width: 34.500em;
 	height: 1.875em;
 }
-
 .register-form{
 	margin-top: 1em;
 	color:black;
 	padding: 0.625em;
 	width: 25em;
 }
-
 .register-button{
 	margin-top: 1em;
 	background-color: #f0f0f0;
@@ -178,11 +162,11 @@ header{
 	width: 25em;
 	height: 2.25em;
 }
-
 .register-button:hover{
 	background-color: #494949;
 	color: #f0f0f0
 }
+
 /*Index if authenticated*/
 #work{
 	width:40%;
@@ -192,7 +176,6 @@ header{
 #work table{
 	margin: 2em auto;
 }
-
 #project{
 	width: 40%;
 	float: right;
@@ -214,21 +197,21 @@ header{
 	padding: 0.625em;
 	width: 25em;
 }
-
 .project-area{
 	margin-top: 1em;
 	width: 36.5em;
 	height: 10em;
 	resize: none;
 }
-
 .descriptionCreate{
 	float:left;
 	margin-left:27.5%
 }
+
 /*Tracking*/
 #contenttrack{
-	margin-top:4em
+	margin-top:4em;
+	font-size:1em;
 }
 #arrive{
 	width:40%;
@@ -243,7 +226,6 @@ header{
 	padding: 0.625em;
 	width: 25em;
 }
-
 .description{
 	float:left;
 	margin-left:2.5em 
@@ -253,7 +235,6 @@ header{
 	float: right;
 	margin-right: 10% 
 }
-
 #watch{
 	margin: 1em auto;
 }
@@ -266,23 +247,20 @@ header{
 
 /*Overview*/
 #contentoverview{
-	margin-top:4em
+	margin-top:4em;
+	font-size:1em;
 }
-
 #projectSelection{
 	margin-top: 2em
 }
-
 select{
 	color:black;
 	padding: 0.625em;
 	width: 15em
 }
-
 .overproject{
 	margin-top: 1em;
 }
-
 .send-button{
 	background-color: #f0f0f0;
 	color: #494949;
@@ -297,6 +275,7 @@ select{
 	border: 1px solid black;
 	margin: 2em auto;
 }
+
 /*Footer*/
 footer{
 	width: 100%;
@@ -306,7 +285,6 @@ footer{
 	box-shadow: 0em -0.125em 0.188em rgba(0, 0, 0, 0.3);
 	z-index: 1;
 }
-
 footer p{
 	float: left;
 	margin: 1.563em 0 0 33.3%;

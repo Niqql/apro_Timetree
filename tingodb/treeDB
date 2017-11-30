@@ -1,9 +1,3 @@
-{"k":"0000000078","o":"0000000137","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511966233739,"_s":"47694b91992105358df8f6152d636c45"}
-{"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"00:00","_id":{"$wrap":"$oid","v":2}}
-{"k":"0000000078","o":"0000000136","v":"001"}
-{"_id":2,"_uid":2,"_dt":1511966373102,"_s":"b35663d7e3dde183bff45cb43339400f"}
-{"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"3:10","_id":{"$wrap":"$oid","v":2}}
 {"k":"0000000078","o":"0000000136","v":"001"}
 {"_id":2,"_uid":2,"_dt":1511968004565,"_s":"42f3c9af35026385decc6aa07ede9c99"}
 {"user":"Thore.August","password":"sha1$266464b0$1$37aadc40ec2b4c3cb23190a419dcf75dea4c8e30","time":"4:13","_id":{"$wrap":"$oid","v":2}}
