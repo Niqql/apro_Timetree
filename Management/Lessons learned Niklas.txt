@@ -1,0 +1,11 @@
+“Lessons learned” von Niklas
+1.
+Ich hatte noch nie ein Javascript Framework gebaut. Mir die Syntax nicht bekannt und ich hatte noch nie mit node.js gearbeitet. Durch öfters Durchgehen der Unterlagen habe ich mich dann aber schnell eingearbeitet und bin schnell und sicher im Programmieren in der Server.js geworden.
+
+2.
+Anfangs hatten wir einen Meilensteinplan gemacht. Hier war es schwer einzuschätzen, wie lange die einzelnen Teilabschnitte dauern würden. Zum Glück war hier die Einschätzung nicht allzu wichtig, da die Arbeit an unserem Projekt sehr produktiv war und wir schnell vorangekommen sind.
+
+3.
+Die Dokumentation der Projektzeiten war auch nicht ganz einfach. Hier hatten wir unseren Projektleiter beauftragt, alle Zeiten zu sammeln und zu Dokumentieren. Das hat dieser auch gut gemacht. Das Problem war jedoch die Kommunikation. Anfangs vergaß ich dem Projektmanager mitzuteilen, wann an was gearbeitet wurde. Dafür haben wir aber jetzt unser tolles TimeTree tool.
+
+
